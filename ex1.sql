@@ -13,7 +13,8 @@ CREATE TABLE product(
     descript varchar(30),
     idBarCde varchar(30),
         stock INT,
-            idCat INT FOREIGN KEY REFERENCES category(idCat)
+            idCat INT FOREIGN KEY REFERENCES category(idCat),
+                price DECIMAL(10,2)
 )
 
 --REGISTER 5 CATEGORIES AND 8 PRODUCTS FILLING ALL THE FIELDS OF THE TABLES
@@ -26,14 +27,15 @@ VALUES ('Drinks'),
        ('Electronics')
 
 INSERT INTO product
-VALUES('Coca Cola', '1234567890123', 100, 1),
-      ('Pepsi', '1234567890124', 150, 1),
-      ('Bread', '1234567890125', 200, 2),
-      ('Shampoo', '1234567890126', 50, 3),
-      ('Soap', '1234567890127', 75, 3),
-      ('Detergent', '1234567890128', 60, 4),
-      ('Laptop', '1234567890129', 30, 5),
-      ('Smartphone', '1234567890130', 40, 5)
+VALUES('Coca Cola', '1234567890123', 100, 1,100.00),
+      ('Pepsi', '1234567890124', 150, 1,200.00),
+      ('Bread', '1234567890125', 200, 2,50.00),
+      ('Shampoo', '1234567890126', 50, 3,30.00),
+      ('Soap', '1234567890127', 75, 3,25.00),
+      ('Detergent', '1234567890128', 60, 4,40.00),
+      ('Laptop', '1234567890129', 30, 5,1000.00),
+      ('Tablet', '1234567890130', 20, 5,500.00),
+      ('Smartphone', '1234567890130', 40, 5, 800.00)
 
 --4. EDIT THE STOCK OF THE PRODUCT WITH ID 4 TO 350 UNITS
 UPDATE product
@@ -58,5 +60,58 @@ ALTER TABLE product
 DROP COLUMN idBarCde
 
 SELECT * FROM product;
+SELECT * FROM category;
+
+-- FUNCOES DE AGRAGAÇÃO
+--MAX = retuurn the maximum value of a column
+SELECT MAX(stock) AS EstoqueMaximo, MIN(stock) AS EstoqueMinimo
+FROM PRODUCT;
+SELECT * FROM product;
+
+SELECT SUM(price) AS precoTotal
+FROM product;
+
+SELECT * FROM product
+UPDATE product SET price = price * 0.85
+WHERE idCat = 1
+
+-- CALCULATED CAMP
+SELECT descript, stock, price, stock * price
+FROM product
+
+-- SUM
+SELECT SUM(stock * price) AS TotalValue
+FROM product
+
+-- AVG calculates the average value of a column
+SELECT AVG(price) AS AveragePrice
+FROM product
+
+-- ROUND = function that rounds a number to a specified number of decimal places
+SELECT ROUND(avg(price), 2) AS AveragePriceRounded
+FROM product
+
+-- COUNT = count the number of occourrences of a value in a column
+SELECT COUNT(*) AS countProducts
+FROM product
+
+-- SUBTRACT IN SELECT
+SELECT COUNT(*) - COUNT(idCat) AS totalProductsWithoutCategory
+FROM product
+
+-- MULTIPLY TO CREATE CALCULATED CAMP
+SELECT price, price * 1.10
+AS newPrice
+FROM product
+
+-- WHAT WOULD BE THE NEW PREICE OF THE PRODUCTS IF WE APPLY 10% OF DISCOUNT?
+SELECT price, price * 1.10
+AS discountedPrice
+FROM product
+
+-- OTHER IMPORTANT FUNCTIONS
+-- DISTINCT: select exclusive lines of a column
+SELECT DISTINCT idCat
+FROM product
 
 
