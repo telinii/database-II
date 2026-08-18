@@ -18,7 +18,7 @@ CREATE TABLE consulta (
     codCons INT PRIMARY KEY IDENTITY(1,1),
     codMed INT FOREIGN KEY REFERENCES Veterinario(codMed),
     codPac INT FOREIGN KEY REFERENCES animal(codPac),
-    dataCons DATE,
+    dataCons DATETIME,
     valor MONEY
 )
 
@@ -81,7 +81,7 @@ VALUES (1, 3, '2026-08-10', 135.00)
 
 -- 4
 UPDATE Veterinario
-SET nome = 'Seu Nome'
+SET nome = 'João Nogueira'
 WHERE codMed = 3
 
 -- 5
