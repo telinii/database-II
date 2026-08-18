@@ -71,7 +71,9 @@ SELECT MAX(valor)
 FROM consulta
 
 -- 2
-SELECT AVG(valor), MAX(valor), MIN(valor)
+SELECT AVG(valor),
+MAX(valor),
+MIN(valor)
 FROM consulta
 WHERE dataCons >= '2026-07-01' AND dataCons < '2026-08-01'
 
@@ -81,11 +83,11 @@ VALUES (1, 3, '2026-08-10', 135.00)
 
 -- 4
 UPDATE Veterinario
-SET nome = 'João Nogueira'
+SET nome = 'Luca'
 WHERE codMed = 3
 
 -- 5
-SELECT especie
+SELECT DISTINCT especie
 FROM animal
 
 -- 6
@@ -103,17 +105,17 @@ SELECT DISTINCT especie
 FROM animal
 
 -- 9
-SELECT nomeAnimal
+SELECT especie,nomeAnimal
 FROM animal
-ORDER BY nomeAnimal ASC
+ORDER BY especie,nomeAnimal -- ordenalção por mais de um campo
 
 -- 10
-SELECT SUM(valor)
+SELECT SUM(valor) AS valorTotal
 FROM consulta
 WHERE codMed = 3
 
 -- 11
-SELECT COUNT(*)
+SELECT COUNT(*) AS qtdVet
 FROM Veterinario
 
 -- 12
